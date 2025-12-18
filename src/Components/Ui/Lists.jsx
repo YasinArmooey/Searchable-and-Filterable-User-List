@@ -1,18 +1,28 @@
 import React from "react";
+// import useUsers from "../../Hooks/useUsers";
+
 
 const Lists = () => {
+  // const { data  } = useUsers();
+
   return (
-    <div>
-      <ul>
-      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">New York</li>
-      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-        Los Angeles
+  <div className="bg-white rounded-lg shadow-md max-w-sm mx-auto">
+  <ul className="space-y-3 p-4 overflow-y-auto h-60">
+    {/* {data.map((user) => (
+      <>
+     
+      <li
+        key={user.id}
+        className="p-2 rounded-md hover:bg-gray-100 cursor-pointer transition-colors duration-200"
+      >
+        {user.address.city}
       </li>
-      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Chicago</li>
-      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Houston</li>
-      <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Miami</li>
-      </ul>
-    </div>
+      </>
+    ))} */}
+  </ul>
+</div>
+
+
   );
 };
 

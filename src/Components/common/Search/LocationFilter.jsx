@@ -1,11 +1,11 @@
-import { useState , useRef } from "react";
+import { useState, useRef } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
-import {Button , Lists } from '../../Ui'
+import { Button, Lists } from "../../Ui";
 import useClickOutside from "../../../Hooks/useClickOutSide";
+
 const LocationFilter = () => {
   const [open, setOpen] = useState(false);
-
- const containerRef = useRef(null);
+  const containerRef = useRef(null);
 
   useClickOutside(containerRef, () => setOpen(false));
   return (
@@ -15,6 +15,7 @@ const LocationFilter = () => {
         onClick={() => setOpen((prev) => !prev)}
       >
         <span className="font-semibold">Find By Location</span>
+
         {open ? <FaAngleUp /> : <FaAngleDown />}
       </Button>
 
