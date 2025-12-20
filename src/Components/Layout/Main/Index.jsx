@@ -1,4 +1,4 @@
-import Search from "../../common/Search/Search";
+import ModalOpener from "../../Modal/ModalOpener";
 
 const Index = () => {
   return (
@@ -14,8 +14,8 @@ const Index = () => {
             Find Your Friends
           </h1>
         </section>
-        {/* Search bar */}       
-          <Search />
+        {/* Search Modal opener */}       
+          <ModalOpener />
       </div>
     </div>
   );

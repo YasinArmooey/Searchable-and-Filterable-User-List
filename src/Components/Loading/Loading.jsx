@@ -1,4 +1,4 @@
-import useUsers from "../../Hooks/useUsers";
+import { useUsers } from "../../context/UsersContext";
 import { CgSpinnerTwoAlt } from "react-icons/cg";
 import { motion } from "framer-motion";
 

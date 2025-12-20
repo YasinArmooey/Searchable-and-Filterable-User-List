@@ -1,24 +1,26 @@
-import { useMemo, useState } from "react";
-import useUsers from "./useUsers";
+import { useState, useMemo } from "react";
 
-const useSearchUsers = () => {
-  const { data, loading, error } = useUsers();
+const useSearch = (data = [], keys = []) => {
   const [query, setQuery] = useState("");
 
-  const filteredData = useMemo(() => {
-    if (!query.trim()) return [];
-    return data.filter((item) =>
-      item.address.city.toLowerCase().includes(query.toLowerCase())
-    );
-  }, [query, data]);
+  const result = useMemo(() => {
+    if (!query) return data;
 
-  return {
-    query,
-    setQuery,
-    filteredData,
-    loading,
-    error,
-  };
+    return data.filter(item =>
+      keys.some(key => {
+        const value = key
+          .split(".")
+          .reduce((acc, k) => acc?.[k], item);
+
+        return value
+          ?.toString()
+          .toLowerCase()
+          .includes(query.toLowerCase());
+      })
+    );
+  }, [data, query, keys]);
+
+  return { query, setQuery, result };
 };
 
-export default useSearchUsers;
+export default useSearch;

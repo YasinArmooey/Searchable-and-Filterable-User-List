@@ -1,11 +1,14 @@
-import Index from '../../Components/Layout/Main/Index'
+import Index from "../../Components/Layout/Main/Index";
+import { UserProvider } from "../../context/UsersContext";
 
 const Home = () => {
   return (
     <div>
-      <Index />
+      <UserProvider>
+        <Index />
+      </UserProvider>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
