@@ -1,15 +1,13 @@
+import { useUsers , useSearch } from "../../Hooks";
 import LocationSearch from "../common/Search/LocationFilter";
-import useSearch from "../../Hooks/useSearch";
-import { Button, Input, ResultsList } from "../Ui";
-import { useUsers } from "../../context/UsersContext";
 import Loading from "../Loading/Loading";
+import { Button, Input, ResultsList } from "../Ui";
 import { IoMdClose } from "react-icons/io";
-
+import ErrorMessage from '../Error/ErrorMessage'
   const SearchModalPanel = ({ closeModal }) => {
+    
     const { data, loading } = useUsers();
-    const { query, setQuery, search } = useSearch();
-    const filterBySearch = data ? search(data) : [];
-
+    const { query, setQuery, result } = useSearch(data);
 
     return (
       <div
@@ -46,11 +44,11 @@ import { IoMdClose } from "react-icons/io";
                   </Button>
                 )}
               </div>
+
               {/* Buttons*/}
 
               {/* location filter */}
               <div className=" flex items-center justify-between gap-5">
-                <LocationSearch />
                 {/* Close Modal */}
                 <div className="">
                   <Button
@@ -66,19 +64,18 @@ import { IoMdClose } from "react-icons/io";
             </div>
           </header>
           {/* Modal Body */}
-          {query && (
+          
             <div className="flex-1 overflow-y-hidden overflow-x-hidden px-5">
               {loading && <Loading />}
 
-              {!loading && filterBySearch.length === 0 && (
+              {!loading && query && result?.length === 0 && (
                 <div className="p-3 text-center">No results</div>
               )}
 
-              {!loading && filterBySearch.length > 0 && (
-                <ResultsList data={filterBySearch} />
+              {!loading && result?.length > 0 && (
+                <ResultsList data={result} />
               )}
             </div>
-          )}
 
           {/* Modal Footer */}
           <div className="bg-white mt-auto">

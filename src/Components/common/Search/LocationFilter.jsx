@@ -2,11 +2,7 @@ import { useRef, useMemo } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import { Button, DropDown } from "../../Ui";
-
-import useClickOutside from "../../../Hooks/useClickOutSide";
-import useOpen from "../../../Hooks/useOpen";
-import { useUsers } from "../../../context/UsersContext";
-import useFilter from "../../../Hooks/useFilter";
+import {useClickOutside , useFilter , useOpen, useUsers} from "../../../Hooks";
 
 const LocationFilter = () => {
   const { selectedCity, setSelectedCity } = useFilter();

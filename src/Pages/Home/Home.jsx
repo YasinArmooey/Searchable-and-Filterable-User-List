@@ -1,14 +1,11 @@
 import Index from "../../Components/Layout/Main/Index";
-import { UserProvider } from "../../context/UsersContext";
+import { useUsers } from "../../Hooks";
+import ErrorMessage from "../../Components/Error/ErrorMessage";
 
 const Home = () => {
-  return (
-    <div>
-      <UserProvider>
-        <Index />
-      </UserProvider>
-    </div>
-  );
+  const { error } = useUsers();
+
+  return <div>{error ? <ErrorMessage /> : <Index />}</div>;
 };
 
 export default Home;
