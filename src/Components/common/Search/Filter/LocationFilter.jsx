@@ -1,11 +1,10 @@
 import { useRef, useMemo } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
-import { Button, DropDown } from "../../Ui";
-import {useClickOutside , useFilter , useOpen, useUsers} from "../../../Hooks";
+import { Button, DropDown } from "../../../Ui";
+import {useClickOutside , useOpen, useUsers} from "../../../../Hooks";
 
-const LocationFilter = () => {
-  const { selectedCity, setSelectedCity } = useFilter();
+const LocationFilter = ({selectedCity , setSelectedCity }) => {
   const { open, setOpen, toggle } = useOpen();
 
   const containerRef = useRef(null);
@@ -34,7 +33,6 @@ const LocationFilter = () => {
   const handleClearCity = (e) => {
     e.stopPropagation();
     setSelectedCity("");
-    setOpen(false);
   };
 
   return (
@@ -42,14 +40,12 @@ const LocationFilter = () => {
       <Button
         className="flex items-center justify-between px-4 py-3 rounded-2xl w-full"
         onClick={toggle}
-        aria-haspopup="listbox"
-        aria-expanded={open}
       >
         <span className="font-semibold">
           {selectedCity || "Find By Location"}
         </span>
 
-        {open ? <FaAngleUp /> : <FaAngleDown />}
+        {open ? <FaAngleUp className="mx-2" /> : <FaAngleDown className="mx-2" />}
 
         {selectedCity && (
           <span
@@ -66,7 +62,7 @@ const LocationFilter = () => {
           className="absolute top-full left-0 w-full bg-white shadow-lg
           rounded-2xl z-10 max-h-[60vh] overflow-y-auto"
         >
-          <DropDown role="listbox">
+          <DropDown>
             {cities.length === 0 && (
               <li className="px-3 py-2 text-gray-400 cursor-default">
                 No locations found
@@ -76,12 +72,7 @@ const LocationFilter = () => {
             {cities.map((city) => (
               <li
                 key={city}
-                role="option"
-                tabIndex={0}
                 onClick={() => handleSelectCity(city)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") handleSelectCity(city);
-                }}
                 className="px-3 py-2 m-3 cursor-pointer hover:bg-[#f5f5f5] rounded-md"
               >
                 {city}

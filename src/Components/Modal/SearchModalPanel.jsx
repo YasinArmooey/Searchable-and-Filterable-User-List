@@ -1,16 +1,22 @@
-import { useUsers, useSearch, usePagination } from "../../Hooks";
-import LocationSearch from "../common/Search/LocationFilter";
+import { useState } from "react";
+import { useUsers, useSearch, usePagination, useFilter } from "../../Hooks";
+import LocationSearch from "../common/Search/Filter/LocationFilter";
 import Loading from "../Loading/Loading";
 import { Button, Input, ResultsList } from "../Ui";
 import { IoMdClose } from "react-icons/io";
-import ErrorMessage from "../Error/ErrorMessage";
 import Pagination from "../common/Search/Pagination/Pagination";
+
 const SearchModalPanel = ({ closeModal }) => {
+
+  const [selectedCity, setSelectedCity] = useState("");
+
   const { data, loading } = useUsers();
   const { query, setQuery, result } = useSearch(data);
+  const FilteredByCity = useFilter(data , selectedCity)
   const { currentPage, currentUsers, paginate, usersPerPage } = usePagination({
-    data: result,
+    data: FilteredByCity,
   });
+
   return (
     <div
       className="fixed inset-0 flex items-center justify-center
@@ -50,6 +56,7 @@ const SearchModalPanel = ({ closeModal }) => {
             {/* Buttons*/}
 
             {/* location filter */}
+            <LocationSearch selectedCity={selectedCity} setSelectedCity={setSelectedCity} />
             <div className=" flex items-center justify-between gap-5">
               {/* Close Modal */}
               <div className="">
@@ -70,9 +77,7 @@ const SearchModalPanel = ({ closeModal }) => {
         <div className="flex-1 overflow-y-hidden overflow-x-hidden px-5">
           {loading && <Loading />}
 
-          {!loading && currentUsers?.length === 0 && (
-            <div className="p-3 text-center">No results</div>
-          )}
+         
 
           {!loading && currentUsers?.length > 0 && (
             <ResultsList data={currentUsers} />
